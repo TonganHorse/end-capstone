@@ -1,8 +1,14 @@
+//@ts-nocheck
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import Postreply from "./Postreply";
+import Postcomment from "./Postcomment";
 
 const Comment = ({ commentData, setCommentData }) => {
   const [compose, setComposition] = useState("");
+  const [replyClick, setReplyClick] = useState(false);
+
+  const [button, setButton] = useState(0);
 
   useEffect(() => {
     axios
@@ -17,43 +23,42 @@ const Comment = ({ commentData, setCommentData }) => {
 
   return (
     <div>
-      <div>
-        {commentData.map((comment) => {
+      <div className="map-container">
+        {commentData.map((comment, index) => {
           return (
             <div key={comment.comment_id}>
-              <div>{comment.username}</div>
-              <div>{comment.comment}</div>
+              <div className="map-container">
+                <div>{comment.username}</div>
+                <div>{comment.comment}</div>
+              </div>
+              <button
+                id={index}
+                onClick={(e) => {
+                  setReplyClick(true);
+                  setButton(+e.target.id);
+                }}
+              >
+                Reply
+              </button>
+              <div>
+                {replyClick && button === index && (
+                  <div>
+                    <Postreply commentId={comment.comment_id} />
+                    <button
+                      onClick={() => {
+                        setReplyClick(false);
+                      }}
+                    >
+                      Discard
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
       </div>
-      <div>
-        <form
-          onSubmit={(e) => {
-            const id = localStorage.getItem("id");
-            e.preventDefault();
-            axios
-              .post("http://localhost:8000/api/postComment", {
-                id,
-                compose,
-              })
-              .then((res) => {
-                console.log(res.data);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }}
-        >
-          <input
-            type="textarea"
-            onChange={(e) => {
-              setComposition(e.target.value);
-            }}
-          />
-          <button type="submit">comment</button>
-        </form>
-      </div>
+      <Postcomment compose={compose} setComposition={setComposition} />
     </div>
   );
 };

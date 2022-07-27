@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import Comment from "./Comment";
 import axios from "axios";
+import Comment from "./Comment";
+import Createworkout from "./Createworkout";
 
 function Workouts() {
   const [workoutData, setWorkoutData] = useState([]);
@@ -15,7 +15,6 @@ function Workouts() {
     axios
       .get("http://localhost:8000/api/getAllWorkouts")
       .then((res) => {
-        console.log(res.data);
         setWorkoutData(res.data);
       })
       .catch((err) => {
@@ -24,62 +23,30 @@ function Workouts() {
   }, []);
 
   return (
-    <div>
-      <p>{"logged in as user " + localStorage.getItem("username")}</p>
+    <div className="map-container">
       <div>
         {workoutData.map((workout, index) => {
           const { workout_id, name } = workout;
           return (
-            <div key={index}>
+            <div className="map-container" key={index}>
               <h1>{name}</h1>
-              <div>{workout_id}</div>
-              <Link to={`/workouts/${workout_id}`}>see more</Link>
+              <Link className="link" to={`/workouts/${workout_id}`}>
+                see more
+              </Link>
             </div>
           );
         })}
       </div>
+      <h1>Chat:</h1>
       <Comment commentData={commentData} setCommentData={setCommentData} />
-      <h1>Create your own workout</h1>
-      <form
-        onSubmit={() => {
-          const id = localStorage.getItem("id");
-          axios
-            .post("http://localhost:8000/api/createWorkout", {
-              workoutName,
-              intensity,
-              workoutDescription,
-              id,
-            })
-            .then((res) => {
-              console.log(res.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        }}
-      >
-        workout name
-        <input
-          type="text"
-          onChange={(e) => {
-            setWorkoutName(e.target.value);
-          }}
-        />
-        intensity
-        <input
-          type="text"
-          onChange={(e) => {
-            setIntensity(e.target.value);
-          }}
-        />
-        <input
-          type="textarea"
-          onChange={(e) => {
-            setWorkoutDescription(e.target.value);
-          }}
-        />
-        <button type="submit"></button>
-      </form>
+      <Createworkout
+        workoutName={workoutName}
+        intensity={intensity}
+        workoutDescription={workoutDescription}
+        setWorkoutName={setWorkoutName}
+        setIntensity={setIntensity}
+        setWorkoutDescription={setWorkoutDescription}
+      />
     </div>
   );
 }

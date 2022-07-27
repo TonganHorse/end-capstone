@@ -29,21 +29,23 @@ function Login(props) {
             });
         }}
       >
-        username
-        <input
-          type="text"
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        password
-        <input
-          type="text"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button type="submit">login</button>
+        <div className="container">
+          username
+          <input
+            type="text"
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          password
+          <input
+            type="text"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button type="submit">login</button>
+        </div>
       </form>
       <p>
         No Account? sign up <Link to="/register">here</Link>

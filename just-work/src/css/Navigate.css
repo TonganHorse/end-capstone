@@ -1,0 +1,26 @@
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: red;
+    height: 3rem;
+}
+
+
+
+.link {
+    text-decoration: none;
+    color: #f4f4f4;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+}
+
+.first-link {
+    font-size: 20pt;
+}
+
+.flex-link {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
