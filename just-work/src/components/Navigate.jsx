@@ -6,7 +6,7 @@ const Navigate = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
   return (
     <div className="flex-container">
-      <Link className="first-link  link" to="/">
+      <Link className="first-link  navlink" to="/">
         JUST WORK
       </Link>
 

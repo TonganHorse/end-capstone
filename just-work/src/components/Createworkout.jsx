@@ -20,7 +20,8 @@ function Createworkout({
         id,
       })
       .then((res) => {
-        console.log(res.data);
+        alert(res.data);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);

@@ -28,7 +28,7 @@ const Comment = ({ commentData, setCommentData }) => {
           return (
             <div key={comment.comment_id}>
               <div className="map-container">
-                <div>{comment.username}</div>
+                <h2>{comment.username}</h2>
                 <div>{comment.comment}</div>
               </div>
               <button

@@ -29,7 +29,8 @@ function Savedworkouts() {
                 axios
                   .delete(`http://localhost:8000/api/deleteSaved/${workout_id}`)
                   .then((res) => alert(res.data))
-                  .then((res) => setDeleteMessage(res.data));
+                  .then((res) => setDeleteMessage(res.data))
+                  .then((res) => window.location.reload());
               }}
             >
               delete

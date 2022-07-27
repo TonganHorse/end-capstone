@@ -37,7 +37,7 @@ function Postreply({ commentId }) {
             return (
               <div key={index}>
                 <div className="map-container">
-                  <div>{username}</div>
+                  <h2>{username}</h2>
                   <div>{reply}</div>
                 </div>
               </div>

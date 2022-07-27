@@ -129,7 +129,6 @@ app.delete("/api/deleteSaved/:id", async (req, res) => {
 
 app.post(`/api/postReply`, async (req, res) => {
   const { replyInput, userId, commentId } = req.body;
-  console.log(commentId);
   await sequelize.query(
     `INSERT INTO replies(reply, user_id, comment_id) VALUES('${replyInput}', ${+userId}, ${+commentId})`
   );
@@ -142,10 +141,6 @@ app.get("/api/getReplies/:id", async (req, res) => {
       .params.id}`
   );
   res.status(200).send(replies[0]);
-});
-
-app.delete(`/api/deleteComment/:id`, async (req, res) => {
-  console.log(req.params);
 });
 
 app.listen(PORT, () => {

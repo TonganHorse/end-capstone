@@ -25,6 +25,7 @@ function Workouts() {
   return (
     <div className="map-container">
       <div>
+        <h1>Workouts:</h1>
         {workoutData.map((workout, index) => {
           const { workout_id, name } = workout;
           return (
