@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-function Login(props) {
+function Login({ loginUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -10,18 +10,17 @@ function Login(props) {
 
   return (
     <div>
+      <h1>Login:</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           axios
             .post("http://localhost:8000/api/login", { username, password })
             .then(async (res) => {
-              console.log(res.data);
               localStorage.setItem("username", res.data.username);
               localStorage.setItem("id", res.data.id);
               localStorage.setItem("email", res.data.email);
-              console.log(localStorage);
-              props.loginUser();
+              loginUser();
               navigate("/workouts");
             })
             .catch((err) => {
@@ -29,26 +28,30 @@ function Login(props) {
             });
         }}
       >
-        <div className="container">
-          username
+        <div className="map-container">
+          <h1>Username</h1>
           <input
             type="text"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           />
-          password
+          <h1>Password</h1>
           <input
-            type="text"
+            type="password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
+          <br />
           <button type="submit">login</button>
         </div>
       </form>
       <p>
-        No Account? sign up <Link to="/register">here</Link>
+        No Account? sign up{" "}
+        <Link className="link" to="/register">
+          here
+        </Link>
       </p>
       <div>{error}</div>
     </div>

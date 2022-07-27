@@ -11,7 +11,7 @@ import "./css/App.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const loginUser = () => setIsLoggedIn(!isLoggedIn);
+  const loginUser = () => setIsLoggedIn(true);
 
   useEffect(() => {
     if (localStorage.getItem("id")) {
@@ -20,10 +20,10 @@ function App() {
   }, []);
   return (
     <div>
-      {isLoggedIn && <Navigate />}
+      {isLoggedIn && <Navigate setIsLoggedIn={setIsLoggedIn} />}
       <div className="body">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login loginUser={loginUser} />} />
           <Route
             path="*"
             element={

@@ -15,7 +15,7 @@ button {
 }
 
 button:hover {
-    color: white;
+    color: lightgreen;
 }
 
 .map-container {
@@ -63,4 +63,10 @@ input {
 .link {
     color: #f4f4f4;
 
+    cursor: pointer;
+
+}
+
+.link:hover {
+    color: lightgreen;
 }
